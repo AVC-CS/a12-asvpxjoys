@@ -44,14 +44,14 @@ int main() {
     cout << "--- TEXT SEGMENT (Code) ---" << endl;
     // ...
      cout << "Address of main(): " << (void*)&main << endl;
-     cout << "Address of checkStack(): " << (void*)&checkStack << endl;
+     cout << "Address of fn2(): " << (void*)&checkStack << endl;
     // ...
     cout << endl;
 
     // TODO: Print DATA segment - 2 initialized global addresses + values
     cout << "--- DATA SEGMENT (Initialized Globals) ---" << endl;
-    cout << "Address of globalVar1: " << globalVar1 << " | Value: " << globalVar1 << endl;
-    cout << "Address of globalVar2: " << globalVar2 << " | Value: " << globalVar2 << endl;
+    cout << "Address of globalVar1: " << &globalVar1 << " | Value: " << globalVar1 << endl;
+    cout << "Address of globalVar2: " << &globalVar2 << " | Value: " << globalVar2 << endl;
     // ...
     cout << endl;
 
@@ -68,8 +68,8 @@ int main() {
     // TODO: Print HEAP segment - 2 heap addresses + comparison
     //       Print "Heap grows: UP" or "DOWN"
     cout << "--- HEAP SEGMENT (Dynamic Allocation) ---" << endl;
-    cout << "Address of heapVar1: " << (void*)&heapVar1 << endl;
-    cout << "Address of heapVar2: " << (void*)&heapVar2 << endl;
+    cout << "Address of heapVar1: " << (void*)heapVar1 << endl;
+    cout << "Address of heapVar2: " << (void*)heapVar2 << endl;
     if (heapVar1 < heapVar2) {
         cout << "Heap grows: UP" << endl;
     } else {
@@ -84,7 +84,7 @@ int main() {
     cout << "DATA(Init) : " << &globalVar1 << endl;
     cout << "BSS(Uninit) : " << &unGlobalVar1 << endl;
     cout << "STACK : " << &localVar << endl;
-    cout << "HEAP : " << (void*)&heapVar1 << endl;
+    cout << "HEAP : " << (void*)heapVar2 << endl;
     //cout << 
     // ...
 
