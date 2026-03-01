@@ -10,7 +10,7 @@ int unGlobalVar1;
 int unGlobalVar2;
 // Stack check function: receives address from caller (parent frame)
 // and compares with a local variable (child frame)
-void checkStack(int* parentAddr) {
+void checkFrame(int* parentAddr) {
     int childVar = 0;
     cout << "--- STACK SEGMENT (Cross-function comparison) ---" << endl;
     // TODO: Print parentAddr value (points to main's local var - parent frame)
@@ -28,7 +28,7 @@ void checkStack(int* parentAddr) {
 
 int main() {
 
-    // TODO: Declare a local variable (STACK - will be passed to checkStack)
+    // TODO: Declare a local variable (STACK - will be passed to checkFrame)
     int localVar = 80;
 
     // TODO: Allocate 2 heap variables using malloc (use larger sizes, e.g. 1024)
@@ -40,11 +40,11 @@ int main() {
     cout << endl;
 
     // TODO: Print TEXT segment - 2 function addresses
-    //       e.g., (void*)&main and (void*)&checkStack
+    //       e.g., (void*)&main and (void*)&checkFrame
     cout << "--- TEXT SEGMENT (Code) ---" << endl;
     // ...
      cout << "Address of main(): " << (void*)&main << endl;
-     cout << "Address of checkStack(): " << (void*)&checkStack << endl;
+     cout << "Address of checkFrame(): " << (void*)&checkFrame << endl;
     // ...
     cout << endl;
 
@@ -62,14 +62,14 @@ int main() {
     // ...
     cout << endl;
 
-    // STACK: call checkStack with address of your local variable
-    // TODO: checkStack(&yourLocalVar);
-    checkStack(&localVar);
+    // STACK: call checkFrame with address of your local variable
+    // TODO: checkFrame(&yourLocalVar);
+    checkFrame(&localVar);
     // TODO: Print HEAP segment - 2 heap addresses + comparison
     //       Print "Heap grows: UP" or "DOWN"
     cout << "--- HEAP SEGMENT (Dynamic Allocation) ---" << endl;
-    cout << "Address of heapVar1: " << (void*)&heapVar1 << endl;
-    cout << "Address of heapVar2: " << (void*)&heapVar2 << endl;
+    cout << "Address of heapVar1: " << (void*)heapVar1 << endl;
+    cout << "Address of heapVar2: " << (void*)heapVar2 << endl;
     if (heapVar1 < heapVar2) {
         cout << "Heap grows: UP" << endl;
     } else {
@@ -84,7 +84,7 @@ int main() {
     cout << "DATA(Init) : " << &globalVar1 << endl;
     cout << "BSS(Uninit) : " << &unGlobalVar1 << endl;
     cout << "STACK : " << &localVar << endl;
-    cout << "HEAP : " << (void*)&heapVar1 << endl;
+    cout << "HEAP : " << (void*)heapVar2 << endl;
     //cout << 
     // ...
 
@@ -100,7 +100,7 @@ int main() {
  * TODO: After running your program, explain what you observed:
  * - Which segment has the lowest addresses? Text code segment has the lowest addresses.
  * - Which has the highest? Heap segment has the highest addresses.
- * - Does stack grow down? How did you verify this? Stack grows down. This was verified by comparing the address of the parent variable in main (localVar) with the address of the child variable in checkStack (childVar) indicating that the stack grows downwards since the childVar address is lower than the parentVar address.
+ * - Does stack grow down? How did you verify this? Stack grows down. This was verified by comparing the address of the parent variable in main (localVar) with the address of the child variable in checkFrame (childVar) indicating that the stack grows downwards since the childVar address is lower than the parentVar address.
  * - Does heap grow up? How did you verify this? Heap grows up. This was verified by comparing the addresses of heapVar1 and heapVar2, where heapVar2 has a higher address than heapVar1, indicating that the heap grows upwards.
  * - What is the gap between HEAP and STACK? At first the gap is not so different, only 4 bits but the gap grows wider as more variables are added. The gap then increases, since the stack grows downwards from higher addresses and the heap grows upwards from lower addresses.
  */
